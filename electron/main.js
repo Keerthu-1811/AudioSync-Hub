@@ -20,13 +20,11 @@ function createWindow() {
     },
   });
 
-  const isDev = process.env.NODE_ENV !== 'production';
-
-  if (isDev) {
+  if (app.isPackaged) {
+    mainWindow.loadFile(path.join(__dirname, '../dist/index.html'));
+  } else {
     mainWindow.loadURL('http://localhost:5173');
     mainWindow.webContents.openDevTools();
-  } else {
-    mainWindow.loadFile(path.join(__dirname, '../dist/index.html'));
   }
 }
 
